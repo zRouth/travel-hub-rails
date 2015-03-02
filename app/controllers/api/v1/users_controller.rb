@@ -1,4 +1,4 @@
-class Api::V1::UsersControllerController < ApplicationController
+class Api::V1::UsersController < ApplicationController
   before_action :set_user, except: [:index]
   def show
     render json: @user

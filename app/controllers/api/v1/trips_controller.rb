@@ -1,4 +1,4 @@
-class Api::V1::TripsControllerController < ApplicationController
+class Api::V1::TripsController < ApplicationController
   before_action :set_trip, except: [:index]
 
   def index
