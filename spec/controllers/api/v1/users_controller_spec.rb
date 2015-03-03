@@ -1,19 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, :type => :controller do
-
-  #{
-  #"id": 1,
-  #"twitter_username": "IamSomewhatC00l",
-  #"insta_name": "IamSomewhatC00l2",
-  #"email": "IamSomewhat@example.com",
-  #"first_name": "Pat",
-  #"last_name": "Mee",
-  #"password_digest": "thisisapassword",
-  #"groups": [1],
-  #"trips": [1]
-#},
-
  it "fetches_a_single_user" do
     user = User.create(twitter_username: "worace",
                        instagram_username: "worace",
@@ -27,10 +14,6 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
     get :show, id: user.id
     data = JSON.parse(@response.body)
     expect(data.keys).to eq ["user"]
-    # user_data = data["user"]
-    # expect(user_data["twitter_username"]).to eq "worace"
-    # expect(user_data["trips"]).to eq [g.id]
-    # expect(user_data["trips"]).to eq [t.id]
   end
 
   it "fetches an index" do
