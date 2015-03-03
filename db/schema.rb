@@ -11,29 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150302210336) do
+ActiveRecord::Schema.define(version: 20150303204256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "posts", force: true do |t|
-    t.datetime "postdate"
+    t.datetime "post_date"
     t.string   "source"
     t.string   "text"
-    t.string   "imageUrl"
-    t.string   "thumbnailUrl"
-    t.string   "locationName"
+    t.string   "image_url"
+    t.string   "thumbnail_url"
+    t.string   "location_name"
     t.string   "latitude"
     t.string   "longitude"
     t.string   "link"
     t.integer  "likes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "trip_accounts", force: true do |t|
-    t.string   "user_name"
+    t.string   "username"
     t.string   "source"
     t.integer  "trip_id"
     t.datetime "created_at"
@@ -53,13 +52,6 @@ ActiveRecord::Schema.define(version: 20150302210336) do
     t.string   "email"
     t.string   "instagram_username"
     t.string   "twitter_username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "users_trips", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "trip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

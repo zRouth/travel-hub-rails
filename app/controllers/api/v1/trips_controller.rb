@@ -25,7 +25,6 @@ class Api::V1::TripsController < ApplicationController
     render json: @trip
   end
 
-
   private
 
   def set_trip
@@ -35,6 +34,4 @@ class Api::V1::TripsController < ApplicationController
   def decoded_params
     ActiveSupport::JSON.decode(request.body.read)
   end
-
-
 end
