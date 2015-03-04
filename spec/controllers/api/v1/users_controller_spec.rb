@@ -1,19 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, :type => :controller do
- it "fetches_a_single_user" do
+  it "fetches a single user" do
     user = User.create(twitter_username: "worace",
                        instagram_username: "worace",
                        name: "worace",
-                       email: "worace@gmail.com")
-    g = Trip.create(name: "turing skiers")
-    t = Trip.create(name: "gnar shredding")
-    user.trips << t
-    user.trips << g
+                       email: "worace@example.com")
 
     get :show, id: user.id
-    data = JSON.parse(@response.body)
-    expect(data.keys).to eq ["user"]
+    user_data = JSON.parse(@response.body)
+    expect(user_data["name"]).to eq("worace")
+    expect(user_data["email"]).to eq("worace@example.com")
   end
 
   it "fetches an index" do
@@ -21,12 +18,8 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
                        instagram_username: "worace",
                        name: "worace",
                        email: "worace@gmail.com")
-    g = Trip.create(name: "turing skiers")
-    t = Trip.create(name: "gnar shredding")
-    user.trips << t
-    user.trips << g
 
-    User.create(twitter_username: "patmee", instagram_username: "patmee", last_name: "mee")
+    User.create(twitter_username: "patmee", instagram_username: "patmee", name: "mee")
 
     get :index
     data = JSON.parse(@response.body)

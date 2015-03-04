@@ -37,10 +37,8 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name,
-                                 :email
+                                 :email,
                                  :twitter_username,
-                                 :instagram_username,
-                                )
+                                 :instagram_username)
   end
-
 end
