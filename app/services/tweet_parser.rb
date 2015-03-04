@@ -12,10 +12,10 @@ class TweetParser
   def parse
     tweets.map do |tweet|
       post = Post.where(link: full_link(tweet.uri)).first_or_create
-      post.postdate = tweet.created_at
+      post.post_date = tweet.created_at
       post.source   = "twitter"
       post.text     = tweet.full_text
-      post.imageUrl = set_media(tweet)
+      post.image_url = set_media(tweet)
       post.save!
       post
     end
