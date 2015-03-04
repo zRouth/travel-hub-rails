@@ -11,23 +11,6 @@ class InstagramService
     @token = Rails.application.secrets.instagram_token
   end
 
-  def search_users(username)
-    url = "https://api.instagram.com/v1/users/search?q=#{username}&client_id=#{token}"
-    response = Faraday.new(url).get.body
-    json     = JSON.parse(response)["data"]
-  end
-
-  def fetch_media_in_range(user_id, start_date, end_date)
-    url = "https://api.instagram.com/v1/users/#{user_id}/media/recent/?max_timestamp=#{end_date}&min_timestamp=#{start_date}&client_id=#{token}"
-    response = Faraday.new(url).get.body
-    json     = JSON.parse(response)["data"]
-  end
-
-  def get_user_id(username)
-    response = search_users(username)
-    user = response.find { |data| data["username"] == username }
-    user["id"]
-  end
 
   def get_user_media
     user_id = get_user_id(username)
@@ -36,6 +19,26 @@ class InstagramService
 
   def self.get_user_media(username, start_date, end_date)
     new(username, start_date, end_date).get_user_media
+  end
+
+  private
+
+  def search_users(username)
+    url = "https://api.instagram.com/v1/users/search?q=#{username}&client_id=#{token}"
+    response = Faraday.new(url).get.body
+    JSON.parse(response)["data"]
+  end
+
+  def fetch_media_in_range(user_id, start_date, end_date)
+    url = "https://api.instagram.com/v1/users/#{user_id}/media/recent/?max_timestamp=#{end_date}&min_timestamp=#{start_date}&client_id=#{token}"
+    response = Faraday.new(url).get.body
+    JSON.parse(response)["data"]
+  end
+
+  def get_user_id(username)
+    response = search_users(username)
+    user = response.find { |data| data["username"] == username }
+    user["id"]
   end
 
   def to_unix(date)
