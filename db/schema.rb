@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303221050) do
+ActiveRecord::Schema.define(version: 20150304212527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,10 @@ ActiveRecord::Schema.define(version: 20150303221050) do
     t.integer  "likes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "trip_account_id"
   end
+
+  add_index "posts", ["trip_account_id"], name: "index_posts_on_trip_account_id", using: :btree
 
   create_table "trip_accounts", force: true do |t|
     t.string   "username"
