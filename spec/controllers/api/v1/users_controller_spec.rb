@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, :type => :controller do
   it "fetches a single user" do
-    user = User.create(twitter_username: "worace",
-                       instagram_username: "worace",
-                       name: "worace",
-                       email: "worace@example.com")
+    user = create(:user, name: "worace", email: "worace@example.com")
 
     get :show, id: user.id
     user_data = JSON.parse(@response.body)
@@ -14,27 +11,36 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
   end
 
   it "fetches an index" do
-    user = User.create(twitter_username: "worace",
-                       instagram_username: "worace",
-                       name: "worace",
-                       email: "worace@gmail.com")
+    user = create(:user, name: "worace", email: "worace@example.com")
 
-    User.create(twitter_username: "patmee", instagram_username: "patmee", name: "mee")
+    create(:user, name: "mee")
 
     get :index
-    data = JSON.parse(@response.body)
-    assert_equal Hash, data.class
-    assert_equal ["users"], data.keys
-    assert_equal Array, data["users"].class
+    users_data = JSON.parse(@response.body)
+    assert_equal ["users"], users_data.keys
+    assert_equal 2, users_data["users"].length
+    assert_equal "worace", users_data["users"].first["name"]
+    assert_equal "mee", users_data["users"].last["name"]
   end
 
-  it "fetches a batch of users on the index" do
-    User.create(twitter_username: "worace", instagram_username: "worace", name: "worace", email: "worace@gmail.com")
-    u2 = User.create(twitter_username: "torta", instagram_username: "torta", name: "herbs", email: "torta@gmail.com")
-    u3 = User.create(twitter_username: "zrouth", instagram_username: "zrouth", name: "zach", email: "zrouth@gmail.com")
+  it "fetches a specified batch of users on the index" do
+    create(:user, name: "worace", email: "worace@example.com")
+    torta  = create(:user, name: "herbs", email: "torta@example.com")
+    zrouth = create(:user, name: "zach", email: "zrouth@example.com")
 
-    get :index, ids: [u2.id, u3.id]
+    get :index, ids: [torta.id, zrouth.id]
     data = JSON.parse(@response.body)
-    assert [u2.id, u3.id], data["users"].map { |u| u["id"] }
+    assert_equal [torta.id, zrouth.id], data["users"].map { |u| u["id"] }
+  end
+
+  it "updates a user's info" do
+    user = create(:user)
+
+    put :update, id: user.id, user: {name: "Viki", email: "viki@example.com"}
+
+    user_data = JSON.parse(@response.body)
+    expect(user_data["name"]).to eq "Viki"
+    expect(user_data["email"]).to eq "viki@example.com"
+    expect(User.find(user.id).name). to eq "Viki"
   end
 end

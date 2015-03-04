@@ -22,12 +22,14 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user.update_attributes(user_params)
+    if @user.save
+      render json: @user
+    end
   end
 
   def delete
     @user.destroy
   end
-
 
   private
 
