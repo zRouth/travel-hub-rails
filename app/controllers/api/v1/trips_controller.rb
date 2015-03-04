@@ -1,5 +1,5 @@
 class Api::V1::TripsController < ApplicationController
-  before_action :set_trip, except: [:index]
+  before_action :set_trip, except: [:index, :create]
 
   def index
     @trips = Trip.all
@@ -11,18 +11,18 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.create(decoded_params)
+    @trip = Trip.create(trip_params)
     render json: @trip
   end
 
   def update
-    @trip.update_attributes(decoded_params)
+    @trip.update_attributes(trip_params)
     render json: @trip
   end
 
-  def delete
+  def destroy
     @trip.destroy
-    render json: @trip
+    render json: { "status" => "success", "message" => "#{@trip.name} was destroyed." }
   end
 
   private
@@ -31,7 +31,7 @@ class Api::V1::TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
 
-  def decoded_params
-    ActiveSupport::JSON.decode(request.body.read)
+  def trip_params
+    params.require(:trip).permit(:start_date, :end_date, :name, :user_id)
   end
 end

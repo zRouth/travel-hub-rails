@@ -12,8 +12,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @user.destroy
+    render json: { "status" => "success", "message" => "#{@user.name} was destroyed." }
   end
 
   private

@@ -20,4 +20,11 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
     expect(user_data["email"]).to eq "viki@example.com"
     expect(User.find(user.id).name). to eq "Viki"
   end
+
+  it "destroys a user" do
+    user = create(:user)
+
+    delete(:destroy, id: user.id)
+    expect(User.last).not_to eq(user)
+  end
 end

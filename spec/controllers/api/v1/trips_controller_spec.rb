@@ -15,8 +15,29 @@ RSpec.describe Api::V1::TripsController, :type => :controller do
 
     get :index
     users_data = JSON.parse(@response.body)
-    assert_equal 2, users_data.length
-    assert_equal "Worace's Awesome Trip", users_data.first["name"]
-    assert_equal "Alex's Awesome Trip", users_data.last["name"]
+    expect(users_data.length).to eq(2)
+    expect(users_data.first["name"]).to eq("Worace's Awesome Trip")
+    expect(users_data.last["name"]).to eq("Alex's Awesome Trip")
+  end
+
+  it "creates a trip" do
+    post(:create, trip: { name: "My Awesome Trip" })
+
+    trip_data = JSON.parse(@response.body)
+    expect(trip_data["name"]).to eq("My Awesome Trip")
+  end
+
+  it "updates a trip" do
+    trip = create(:trip)
+    put(:update, id: trip.id, trip: { name: "My Awesome Trip" })
+
+    trip_data = JSON.parse(@response.body)
+    expect(trip_data["name"]).to eq("My Awesome Trip")
+  end
+
+  it "deletes a trip" do
+    trip = create(:trip)
+    delete(:destroy, id: trip.id)
+    expect(Trip.last).not_to eq(trip)
   end
 end
