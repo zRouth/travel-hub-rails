@@ -24,7 +24,7 @@ describe TweetParser do
         tweets = TwitterService.get_tweets_in_range("@_VikiAnn", Date.today.prev_day, DateTime.now)
         tweet = TweetParser.parse(tweets).first
 
-        expect(tweet.imageUrl).to_not eq(nil)
+        expect(tweet.image_url).to_not eq(nil)
       end
     end
   end
