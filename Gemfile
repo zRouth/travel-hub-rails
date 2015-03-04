@@ -20,4 +20,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'webmock'
   gem 'simplecov', require: false
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
