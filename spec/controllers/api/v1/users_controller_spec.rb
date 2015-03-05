@@ -6,8 +6,8 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
 
     get :show, id: user.id
     user_data = JSON.parse(@response.body)
-    expect(user_data["name"]).to eq("worace")
-    expect(user_data["email"]).to eq("worace@example.com")
+    expect(user_data["user"]["name"]).to eq("worace")
+    expect(user_data["user"]["email"]).to eq("worace@example.com")
   end
 
   it "updates a user's info" do
@@ -16,8 +16,8 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
     put :update, id: user.id, user: {name: "Viki", email: "viki@example.com"}
 
     user_data = JSON.parse(@response.body)
-    expect(user_data["name"]).to eq "Viki"
-    expect(user_data["email"]).to eq "viki@example.com"
+    expect(user_data["user"]["name"]).to eq "Viki"
+    expect(user_data["user"]["email"]).to eq "viki@example.com"
     expect(User.find(user.id).name). to eq "Viki"
   end
 
