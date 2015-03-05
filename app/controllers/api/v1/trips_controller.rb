@@ -1,5 +1,6 @@
 class Api::V1::TripsController < ApplicationController
   before_action :set_trip, except: [:index, :create]
+  before_action :set_headers
 
   def index
     @trips = Trip.all
@@ -33,5 +34,9 @@ class Api::V1::TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:start_date, :end_date, :name, :user_id)
+  end
+
+  def set_headers
+    headers['Access-Control-Allow-Origin'] = '*'
   end
 end

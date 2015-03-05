@@ -1,8 +1,11 @@
 class TripSerializer < ActiveModel::Serializer
-  has_one :user, serializer: UserSerializer
+  embed :ids, include: true
 
-  attributes :name,
+  attributes :id,
+             :name,
              :start_date,
-             :end_date,
-             :posts
+             :end_date
+
+  has_one :user
+  has_many :posts
 end
