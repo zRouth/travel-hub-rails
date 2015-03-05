@@ -21,6 +21,8 @@ class TweetParser
     end
   end
 
+  private
+
   def set_media(tweet)
     unless tweet.media.empty?
       wanted_tweet = tweet.media.find do |media|
