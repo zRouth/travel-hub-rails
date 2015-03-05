@@ -9,5 +9,6 @@ module TravelHub
     config.generators.stylesheets = false
     config.generators.javascripts = false
     config.generators.helper      = false
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   end
 end

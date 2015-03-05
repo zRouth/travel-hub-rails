@@ -13,6 +13,7 @@ gem 'spring',        group: :development
 gem 'twitter'
 gem 'figaro'
 gem 'faraday'
+gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
