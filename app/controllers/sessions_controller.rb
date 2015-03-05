@@ -5,16 +5,16 @@ class SessionsController < Devise::SessionsController
   skip_before_action :authenticate_user_from_token!, { only: [:create] }
 
   def create
-    user = User.find_for_database_authentication(email: params[:email])
+    user = User.find_for_database_authentication(email: params[:user][:user_email])
 
-    if user && user.valid_password?(params[:password])
+    if user && user.valid_password?(params[:user][:password])
         data = {
           token:      user.authentication_token,
           user_email: user.email
         }
         render json: data, status: 201 and return
     else
-      render json: {error: "invalid credentials"}, status: 401
+      render json: { error: "invalid credentials" }, status: 401
     end
   end
 end
