@@ -7,7 +7,7 @@ class Trip < ActiveRecord::Base
   def posts
     trip_accounts.flat_map do |trip_account|
       trip_account.posts.flat_map do |post|
-        PostSerializer.new(post)
+        post
       end
     end
   end

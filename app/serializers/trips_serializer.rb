@@ -1,7 +1,7 @@
 class TripsSerializer < ActiveModel::Serializer
-  has_one :user, serializer: UserSerializer
-
-  attributes :name,
+  attributes :id,
+             :name,
              :start_date,
-             :end_date
+             :end_date,
+             :user_id
 end
