@@ -13,7 +13,7 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.create(trip_params)
+    @trip = Trip.create!(trip_params.merge(user: current_user))
     render json: @trip
   end
 
