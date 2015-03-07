@@ -30,8 +30,8 @@ class Seed
                           user: jorge)
     @steves_trip = FactoryGirl.create(:trip,
                           name: "Steve's Escape",
-                          start_date: Date.current.advance(days: 30),
-                          end_date: Date.current.advance(days: 55),
+                          start_date: Date.new(2015, 3, 2),
+                          end_date: Date.new(2015, 3, 8),
                           user: steve)
 
     puts "Trips generated"
