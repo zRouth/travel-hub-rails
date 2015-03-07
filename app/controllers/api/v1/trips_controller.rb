@@ -1,4 +1,5 @@
 class Api::V1::TripsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_trip, except: [:index, :create]
   before_action :set_headers
 

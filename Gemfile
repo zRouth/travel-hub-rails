@@ -14,8 +14,10 @@ gem 'twitter'
 gem 'figaro'
 gem 'faraday'
 gem 'devise'
+gem 'turbolinks'
 
 group :development, :test do
+  gem 'rack-cors', :require => 'rack/cors'
   gem 'rspec-rails', '~> 3.0'
   gem 'timecop'
   gem 'vcr'
