@@ -1,5 +1,5 @@
 class SessionsController < Devise::SessionsController
-  respond_to :html, :json
+  respond_to :json
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, { only: [:create]}
   skip_before_action :authenticate_user_from_token!, { only: [:create] }
@@ -9,6 +9,7 @@ class SessionsController < Devise::SessionsController
 
     if user && user.valid_password?(params[:user][:password])
         data = {
+          id:         user.id,
           token:      user.authentication_token,
           user_email: user.email
         }
