@@ -1,5 +1,4 @@
 require 'twitter'
-require 'figaro'
 
 class TwitterService
   attr_reader :user, :start_date, :end_date

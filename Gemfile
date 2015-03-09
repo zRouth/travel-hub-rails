@@ -15,6 +15,8 @@ gem 'figaro'
 gem 'faraday'
 gem 'devise'
 gem 'turbolinks'
+gem 'resque', '~> 2.0.0.pre.1', github: 'resque/resque'
+
 
 group :development, :test do
   gem 'rack-cors', :require => 'rack/cors'
