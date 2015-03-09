@@ -6,7 +6,7 @@ RSpec.describe Trip, :type => :model do
     expect(trip).to_not be_valid
   end
 
-  it "can return a serialized array of posts" do
+  it "can retrieve its posts" do
     user = create(:user)
     trip = create(:trip,
                  start_date: Date.today,
@@ -17,7 +17,9 @@ RSpec.describe Trip, :type => :model do
     post = create(:post, text: "bob's post", trip_account: bob)
 
     trip.posts.each do |post|
-      expect(post.class).to eq PostSerializer
+      expect(post.class).to eq Post
     end
+    expect(trip.posts.length).to eq 1
+    expect(trip.posts).to eq [post]
   end
 end

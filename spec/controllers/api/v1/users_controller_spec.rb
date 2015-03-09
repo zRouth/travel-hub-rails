@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController, :type => :controller do
   it "fetches a single user" do
     user = create(:user, name: "worace", email: "worace@example.com")
+    sign_in user
 
     get :show, id: user.id
     user_data = JSON.parse(@response.body)
@@ -12,6 +13,7 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
 
   it "updates a user's info" do
     user = create(:user)
+    sign_in user
 
     put :update, id: user.id, user: {name: "Viki", email: "viki@example.com"}
 
@@ -23,6 +25,7 @@ RSpec.describe Api::V1::UsersController, :type => :controller do
 
   it "destroys a user" do
     user = create(:user)
+    sign_in user
 
     delete(:destroy, id: user.id)
     expect(User.last).not_to eq(user)
