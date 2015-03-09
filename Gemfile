@@ -17,6 +17,7 @@ gem 'devise'
 gem 'turbolinks'
 gem 'resque'
 
+gem 'webmock', require: false, group: :test
 
 group :development, :test do
   gem 'rack-cors', :require => 'rack/cors'
@@ -25,7 +26,6 @@ group :development, :test do
   gem 'vcr'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
-  gem 'webmock'
   gem 'simplecov', require: false
   gem 'factory_girl_rails'
   gem 'faker'

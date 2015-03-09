@@ -23,6 +23,6 @@ class Trip < ActiveRecord::Base
     instagram_accounts = trip_accounts.select do |trip_account|
       trip_account.source == "instagram"
     end
-    twitter_accounts.map(&:username)
+    instagram_accounts.map(&:username)
   end
 end
