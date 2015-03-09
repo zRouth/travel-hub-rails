@@ -15,6 +15,7 @@ class Api::V1::TripsController < ApplicationController
 
   def create
     @trip = Trip.create!(trip_params.merge(user: current_user))
+    attach_trip_accounts(trip_account_params, @trip)
     render json: @trip
   end
 
@@ -43,7 +44,17 @@ class Api::V1::TripsController < ApplicationController
     params.require(:trip).permit(:start_date, :end_date, :name, :user_id)
   end
 
+  def trip_account_params
+    params.require(:trip).permit(:twitter_accounts, :instagram_accounts)
+  end
+
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
+  end
+
+  def attach_trip_accounts(trip_account_params, trip)
+    if trip_account_params
+      TripAccount.assign_trip_accounts(trip_account_params, trip)
+    end
   end
 end
