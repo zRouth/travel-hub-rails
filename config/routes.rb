@@ -1,7 +1,9 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions' }
 
-  # mount Resque::Server, :at => "/resque"
+  mount Resque::Server.new, at: "/resque"
 
   namespace :api do
     namespace :v1 do

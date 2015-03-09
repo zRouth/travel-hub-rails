@@ -32,8 +32,8 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def update_posts
-    Resque.enqueue(PostFetcher, @trip.start_date, @trip.end_date, "twitter", @trip.twitter_usernames)
-    Resque.enqueue(PostFetcher, @trip.start_date, @trip.end_date, "instagram", @trip.instagram_usernames)
+    Resque.enqueue(PostFetcher, @trip.start_date, @trip.end_date, "twitter", @trip.twitter_names)
+    Resque.enqueue(PostFetcher, @trip.start_date, @trip.end_date, "instagram", @trip.instagram_names)
   end
 
   def set_trip
