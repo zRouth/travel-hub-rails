@@ -12,7 +12,7 @@ describe InstagramService do
 
         expect(media.count).to eq(3)
         expect(media.first["user"]["username"]).to eq(username)
-        expect(fangirls).to eq(335)
+        expect(fangirls).to eq(343)
       end
     end
   end

@@ -6,5 +6,6 @@ class PostSerializer < ActiveModel::Serializer
              :link,
              :source,
              :post_date,
+             :username,
              :likes
 end
