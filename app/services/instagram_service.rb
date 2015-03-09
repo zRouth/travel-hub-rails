@@ -14,7 +14,7 @@ class InstagramService
 
   def get_user_media
     user_id = get_user_id(username)
-    media   = fetch_media_in_range(user_id, start_date, end_date)
+    fetch_media_in_range(user_id, start_date, end_date)
   end
 
   def self.get_user_media(username, start_date, end_date)
